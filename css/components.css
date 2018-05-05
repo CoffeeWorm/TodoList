@@ -7,8 +7,10 @@
   line-height: 30px;
   text-align: center;
   text-decoration: none;
-  border-radius: 3px;
+  background-color: #fff;
+  border-radius: 5px;
   border: 1px solid #bbb;
+  outline: 0;
   transition: all .2s;
   -webkit-transition: all .2s;
   -o-transition: all .2s;
@@ -23,4 +25,150 @@
 .u-button:hover {
   border: 1px solid #999;
   box-shadow: 0 0 3px rgba(0, 0, 0, .2);
+}
+
+.u-top,
+.u-add,
+.u-shrink,
+.u-close {
+  position: relative;
+  display: inline-block;
+  width: 15px;
+  height: 20px;
+  margin: 0 5px;
+}
+
+
+.u-shrink:after,
+.u-shrink:before,
+.u-close:after,
+.u-close:before,
+.u-add:before,
+.u-add:after,
+.u-top:before,
+.u-top:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 10px;
+  height: 2px;
+  background-color: #333;
+  border-radius: 1px;
+  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+}
+
+.u-shrink:hover:after,
+.u-shrink:hover:before,
+.u-close:hover:after,
+.u-close:hover:before,
+.u-add:hover:before,
+.u-add:hover:after,
+.u-top:hover:before,
+.u-top:hover:after {
+  background-color: #fff;
+}
+
+.u-top:before {
+  transform: translate(-75%, -50%) rotate(-60deg);
+  -webkit-transform: translate(-75%, -50%) rotate(-60deg);
+  -moz-transform: translate(-75%, -50%) rotate(-60deg);
+  -ms-transform: translate(-75%, -50%) rotate(-60deg);
+  -o-transform: translate(-75%, -50%) rotate(-60deg);
+}
+
+.u-top:after {
+  transform: translate(-25%, -50%) rotate(60deg);
+  -webkit-transform: translate(-25%, -50%) rotate(60deg);
+  -moz-transform: translate(-25%, -50%) rotate(60deg);
+  -ms-transform: translate(-25%, -50%) rotate(60deg);
+  -o-transform: translate(-25%, -50%) rotate(60deg);
+}
+
+.u-add:before {
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.u-add:after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  -webkit-transform: translate(-50%, -50%) rotate(90deg);
+  -moz-transform: translate(-50%, -50%) rotate(90deg);
+  -o-transform: translate(-50%, -50%) rotate(90deg);
+  -ms-transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.u-shrink:before {
+  transform: translate(-50%, -50%);
+}
+
+.u-shrink:after {
+  transform: translate(-50%, -50%);
+}
+
+.u-close:before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+  -moz-transform: translate(-50%, -50%) rotate(-45deg);
+  -ms-transform: translate(-50%, -50%) rotate(-45deg);
+  -o-transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.u-close:after {
+  transform: translate(-50%, -50%) rotate(45deg);
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+  -moz-transform: translate(-50%, -50%) rotate(45deg);
+  -ms-transform: translate(-50%, -50%) rotate(45deg);
+  -o-transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.u-rotate {
+  transition: all .5s;
+  -webkit-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -moz-transition: all .5s;
+}
+
+.u-rotate:hover {
+  transform: rotate(360deg);
+}
+
+.u-title {
+  padding-top: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  border-bottom: 1px solid #bbb;
+}
+
+.u-more {
+  position: relative;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+}
+
+.u-more input[type=checkbox] {
+  display: none;
+}
+
+.u-more .dot,
+.u-more:after,
+.u-more:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  display: block;
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background-color: #333;
 }

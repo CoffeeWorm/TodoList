@@ -1,0 +1,121 @@
+@charset "utf-8";
+
+.m-nav {
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  background-color: #333;
+}
+
+.m-nav h1 {
+  padding: 0;
+  margin: 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.m-header {
+  /*text-align: center;*/
+}
+
+.m-header .ps {
+  padding: 15px 0;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.m-header .input-zone .mid,
+.m-header .input-zone .right {
+  float: right;
+  width: 50px;
+  margin-left: 10px;
+}
+
+.m-header .input-zone .left {
+  overflow: hidden;
+}
+
+.m-header .content,
+.m-header .time,
+.m-header .title {
+  display: block;
+  width: 100%;
+  height: 30px;
+  padding: 3px 10px;
+  font-size: 14px;
+  color: #666;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #bbb;
+  outline: 0;
+}
+
+.m-header .content {
+  height: 60px;
+  resize: none;
+}
+
+.m-header .content:focus,
+.m-header .time:focus,
+.m-header .title:focus {
+  box-shadow: 0 0 3px #38f;
+}
+
+.m-header .more {
+  display: none;
+}
+
+.m-header .more.active {
+  display: block;
+}
+
+
+.m-list .list-item {
+  padding: 5px 25px;
+}
+
+.m-list .list-item .check,
+.m-list .list-item .title {
+  float: left;
+}
+
+.m-list .list-item .check {
+  display: inline-block;
+  margin-top: 3px;
+  margin-left: 3px;
+}
+
+.m-list .list-item .title {
+  margin-left: 5px;
+  font-size: 16px;
+}
+
+.m-list .list-item .delete,
+.m-list .list-item .change {
+  float: right;
+}
+
+.m-list .list-item .content,
+.m-list .list-item .time {
+  margin: 5px 5px 3px;
+  text-indent: 2em;
+}
+
+.m-list .list-item .time {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.m-footer {
+  text-align: center;
+}
+
+.m-footer .clear {
+  cursor: pointer;
+}
+
+.m-footer .clear:hover {
+  text-decoration: underline;
+}

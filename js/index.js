@@ -1,5 +1,26 @@
 'use strict';
 import storage from "./Storage.js"
+var Event = new Vue();
+
+Vue.component("list", {
+  template: "#task-tpl",
+  props: ["todo"],
+  methods: {
+    action: function(name, id) {
+      Event.$emit(name, id)
+    }
+  }
+});
+
+Vue.component("list-finish", {
+  template: "#task-finish-tpl",
+  props: ["todo"],
+  methods: {
+    action: function(name, id) {
+      Event.$emit(name, id)
+    }
+  }
+});
 
 var app = new Vue({
   el: "#v-app",
@@ -59,6 +80,17 @@ var app = new Vue({
       });
       return this.list.indexOf(item);
     },
+    toggle: function(){
+      var tmp = document.getElementsByClassName('more')[0];
+      if (tmp.className === "more") {
+        tmp.className = "more active";
+      } else {
+        tmp.className = "more";
+      }
+    },
+    clear: function(){
+      this.list = [];
+    },
     reset: function(options) {
       var tpl = {
         id: -1,
@@ -71,8 +103,23 @@ var app = new Vue({
       this.current = options || tpl;
     }
   },
-  mounted: function(){
+  mounted: function() {
     this.list = storage.__getAll().data;
+    Event.$on('remove', function(id) {
+      if (id) {
+        this.remove(id);
+      }
+    }.bind(this));
+    Event.$on('change', function(id) {
+      if (id) {
+        this.change(id);
+      }
+    }.bind(this));
+    Event.$on('finishTrigger', function(id) {
+      if (id) {
+        this.finishTrigger(id);
+      }
+    }.bind(this));
   },
   watch: {
     list: {

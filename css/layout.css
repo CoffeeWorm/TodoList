@@ -19,21 +19,36 @@
 }
 
 .container-fluid {
+  position: relative;
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
 }
 
 .container {
+  position: relative;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .container-narrow {
+  position: relative;
   width: 80%;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.container-xs {
+  display: block;
+  width: 40%;
+  margin: 0 auto 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .container-xs {
+    width: 90%;
+  }
 }
 
 [class^="container"]:before,

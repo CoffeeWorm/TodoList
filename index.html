@@ -4,52 +4,84 @@
 <head>
   <meta charset="utf-8">
   <title>Todo List</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
   <link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <style>
+  body {
+    background-color: #ddd;
+  }
+  </style>
 </head>
 
 <body>
-  <nav class="m-nav">你要干啥勒？</nav>
-  <div class="m-todolist" id="v-app">
-    <div class="container">
-      <h2 class="title">玩游戏就不要分心！</h2>
-    </div>
-    <div class="container">
-      <input class="u-input" v-model="current.title" type="text">
-      <label for="" class="u-more">
-        <i calss="dot"></i>
-        <input type="checkbox">
-      </label>
+  <nav class="m-nav">
+    <h1>你要干啥勒？</h1>
+  </nav>
+  <div id="v-app">
+    <form class="m-header" @submit.prevent="merge">
+      <h2 class="ps">游戏玩了吗？就写作业！</h2>
+      <div class="container-xs input-zone clearfix">
+        <div class="right">
+          <input href="javascript:;" class="u-button" type="submit" value="确定">
+        </div>
+        <div class="mid">
+          <input href="javascript:;" class="u-button" type="button" @click="toggle" value="详情">
+        </div>
+        <div class="left">
+          <input class="title u-input" v-model="current.title" type="text" autofocus>
+        </div>
+      </div>
       <div class="more">
-        <textarea class="u-textarea" v-model="current.content"></textarea>
-        <input type="datetime" v-model="current.time">
+        <div class="container-xs">
+          <textarea class="content" v-model="current.content"></textarea>
+          <input class="time" type="datetime-local" v-model="current.time">
+        </div>
       </div>
-      <a href="javascript:;" class="u-button" @click="merge">提交</a>
-    </div>
+    </form>
     <div class="m-list">
-      <h2 class="u-title">未完成</h2>
-      <div class="container">
-        <div v-for="todo in list" v-if="!todo.finish" class="u-list u-list-1">
-          {{todo.title}}
-          <a href="javascript:;" class="u-button" @click="change(todo.id)">更新</a>
-          <a href="javascript:;" class="u-button" @click="remove(todo.id)">删除</a>
-          <a href="javascript:;" class="u-button" @click="finishTrigger(todo.id)">完成</a>
+      <div class="container-xs">
+        <h2 class="u-title">未完成</h2>
+        <div class="container">
+          <list :todo="todo" v-for="todo in list" v-if="!todo.finish"></list>
         </div>
       </div>
     </div>
     <div class="m-list">
-      <h2 class="u-title">已完成</h2>
-      <div class="container">
-        <div v-for="todo in list" v-if="todo.finish" class="u-list u-list-1">
-          {{todo.title}}
-          <a href="javascript:;" class="u-button" @click="remove(todo.id)">删除</a>
-          <a href="javascript:;" class="u-button" @click="finishTrigger(todo.id)">unfinish</a>
+      <div class="container-xs">
+        <h2 class="u-title">已完成</h2>
+        <div class="container">
+          <list-finish :todo="todo" v-for="todo in list" v-if="todo.finish"></list-finish>
         </div>
       </div>
     </div>
+    <footer class="m-footer">CoffeeWorm&copy; <a class="clear" @click="clear">Clear</a></footer>
   </div>
-  <footer>CoffeeWorm&copy;</footer>
+  <template id="task-tpl">
+    <div class="list-item">
+      <div class="clearfix">
+        <input class="check" href="javascript:;" type="checkbox" @click="action('finishTrigger',todo.id)">
+        <h3 class="title">{{todo.title}}</h3>
+        <a href="javascript:;" class="change u-top u-rotate" @click="action('change',todo.id)"></a>
+        <a href="javascript:;" class="delete u-close u-rotate" @click="action('remove',todo.id)"></a>
+      </div>
+      <p class="content">{{todo.content}}</p>
+      <p class="time">{{todo.time}}</p>
+    </div>
+  </template>
+  <template id="task-finish-tpl">
+    <div class="list">
+      <input href="javascript:;" type="checkbox" checked @click="action('finishTrigger',todo.id)">
+      <h3>{{todo.title}}</h3>
+      <p>{{todo.content}}</p>
+      <a href="javascript:;" class="u-top" @click="action('change',todo.id)"></a>
+      <a href="javascript:;" class="u-close" @click="action('remove',todo.id)"></a>
+    </div>
+  </template>
   <script src="node_modules/_vue@2.5.16@vue/dist/vue.min.js"></script>
   <script src="dist/index.bundle.js"></script>
 </body>
