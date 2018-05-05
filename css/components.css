@@ -148,27 +148,3 @@
   font-size: 18px;
   border-bottom: 1px solid #bbb;
 }
-
-.u-more {
-  position: relative;
-  display: inline-block;
-  height: 30px;
-  width: 30px;
-}
-
-.u-more input[type=checkbox] {
-  display: none;
-}
-
-.u-more .dot,
-.u-more:after,
-.u-more:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  display: block;
-  height: 4px;
-  width: 4px;
-  border-radius: 50%;
-  background-color: #333;
-}
