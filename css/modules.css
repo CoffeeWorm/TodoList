@@ -15,10 +15,6 @@
   font-weight: 500;
 }
 
-.m-header {
-  /*text-align: center;*/
-}
-
 .m-header .ps {
   padding: 15px 0;
   font-size: 16px;
@@ -109,6 +105,7 @@
 }
 
 .m-footer {
+  margin-top: 10px;
   text-align: center;
 }
 

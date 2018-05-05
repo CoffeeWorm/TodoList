@@ -45,7 +45,7 @@
     </form>
     <div class="m-list">
       <div class="container-xs">
-        <h2 class="u-title">未完成</h2>
+        <h2 class="u-title">Sh*t！还剩这么多</h2>
         <div class="container">
           <list :todo="todo" v-for="todo in list" v-if="!todo.finish"></list>
         </div>
@@ -53,33 +53,36 @@
     </div>
     <div class="m-list">
       <div class="container-xs">
-        <h2 class="u-title">已完成</h2>
+        <h2 class="u-title">我做完的，哈哈哈</h2>
         <div class="container">
           <list-finish :todo="todo" v-for="todo in list" v-if="todo.finish"></list-finish>
         </div>
       </div>
     </div>
     <footer class="m-footer">CoffeeWorm&copy; <a class="clear" @click="clear">Clear</a></footer>
+    <audio id="prompt" src="sound/sound.mp3" preload="auto"></audio>
   </div>
   <template id="task-tpl">
     <div class="list-item">
       <div class="clearfix">
         <input class="check" href="javascript:;" type="checkbox" @click="action('finishTrigger',todo.id)">
         <h3 class="title">{{todo.title}}</h3>
-        <a href="javascript:;" class="change u-top u-rotate" @click="action('change',todo.id)"></a>
         <a href="javascript:;" class="delete u-close u-rotate" @click="action('remove',todo.id)"></a>
+        <a href="javascript:;" class="change u-top u-rotate" @click="action('change',todo.id)"></a>
       </div>
       <p class="content">{{todo.content}}</p>
       <p class="time">{{todo.time}}</p>
     </div>
   </template>
   <template id="task-finish-tpl">
-    <div class="list">
-      <input href="javascript:;" type="checkbox" checked @click="action('finishTrigger',todo.id)">
-      <h3>{{todo.title}}</h3>
-      <p>{{todo.content}}</p>
-      <a href="javascript:;" class="u-top" @click="action('change',todo.id)"></a>
-      <a href="javascript:;" class="u-close" @click="action('remove',todo.id)"></a>
+    <div class="list-item">
+      <div class="clearfix">
+        <input class="check" href="javascript:;" type="checkbox" @click="action('finishTrigger',todo.id)" checked>
+        <h3 class="title">{{todo.title}}</h3>
+        <a href="javascript:;" class="delete u-close u-rotate" @click="action('remove',todo.id)"></a>
+      </div>
+      <p class="content">{{todo.content}}</p>
+      <p class="time">{{todo.time}}</p>
     </div>
   </template>
   <script src="node_modules/_vue@2.5.16@vue/dist/vue.min.js"></script>

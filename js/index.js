@@ -30,9 +30,9 @@ var app = new Vue({
           id: number, 
           title: string, 
           content: string, 
-          time: number,
+          time: string,
           finish: boolean, 
-          confirmed: boolean
+          confirmed: boolean,
       } */
       current: {
         id: -1,
@@ -67,6 +67,7 @@ var app = new Vue({
       this.list.splice(sub, 1);
     },
     change: function(id) {
+      console.log(id);
       var sub = this.findIndex(id);
       this.current = this.list[sub];
     },
@@ -80,7 +81,7 @@ var app = new Vue({
       });
       return this.list.indexOf(item);
     },
-    toggle: function(){
+    toggle: function() {
       var tmp = document.getElementsByClassName('more')[0];
       if (tmp.className === "more") {
         tmp.className = "more active";
@@ -88,8 +89,9 @@ var app = new Vue({
         tmp.className = "more";
       }
     },
-    clear: function(){
+    clear: function() {
       this.list = [];
+      storage.setMaxSub(0);
     },
     reset: function(options) {
       var tpl = {
@@ -104,22 +106,44 @@ var app = new Vue({
     }
   },
   mounted: function() {
+    //从localStorage中将数据取出
     this.list = storage.__getAll().data;
+    //组件事件处理
     Event.$on('remove', function(id) {
-      if (id) {
+      if (id || id === 0) {
         this.remove(id);
       }
     }.bind(this));
     Event.$on('change', function(id) {
-      if (id) {
+      if (id || id === 0) {
         this.change(id);
       }
     }.bind(this));
     Event.$on('finishTrigger', function(id) {
-      if (id) {
+      if (id || id === 0) {
         this.finishTrigger(id);
       }
     }.bind(this));
+    //提示逻辑
+    var audio = document.getElementById("prompt");
+    var check = function() {
+      this.list.forEach(function(item) {
+        if (item.time) {
+          var timestamp = new Date(item.time).getTime();
+          if (Date.now() >= timestamp && !item.confirmed) {
+              audio.currentTime = 0;
+              audio.pause();
+              audio.play();
+              item.confirmed = confirm(item.title);
+              item.finish = true;
+              audio.pause();
+              audio.currentTime = 0;
+              return;
+          }
+        }
+      });
+    };
+    setInterval(check.bind(this), 1000);
   },
   watch: {
     list: {
