@@ -1,30 +1,30 @@
 'use strict';
-import storage from "./Storage.js"
+import storage from './Storage.js';
 var Event = new Vue();
 
-Vue.component("list", {
-  template: "#task-tpl",
-  props: ["todo"],
+Vue.component('list', {
+  template: '#task-tpl',
+  props: ['todo'],
   methods: {
     action: function(name, id) {
-      Event.$emit(name, id)
+      Event.$emit(name, id);
     }
   }
 });
 
-Vue.component("list-finish", {
-  template: "#task-finish-tpl",
-  props: ["todo"],
+Vue.component('list-finish', {
+  template: '#task-finish-tpl',
+  props: ['todo'],
   methods: {
     action: function(name, id) {
-      Event.$emit(name, id)
+      Event.$emit(name, id);
     }
   }
 });
 
 var app = new Vue({
-  el: "#v-app",
-  data: function() {
+  el: '#v-app',
+  data: (function() {
     return {
       /* { 
           id: number, 
@@ -36,15 +36,15 @@ var app = new Vue({
       } */
       current: {
         id: -1,
-        title: "",
-        content: "",
+        title: '',
+        content: '',
         time: null,
         finish: false,
         confirmed: false
       },
       list: []
     };
-  }(),
+  })(),
   methods: {
     merge: function() {
       var title = this.current.title;
@@ -83,10 +83,10 @@ var app = new Vue({
     },
     toggle: function() {
       var tmp = document.getElementsByClassName('more')[0];
-      if (tmp.className === "more") {
-        tmp.className = "more active";
+      if (tmp.className === 'more') {
+        tmp.className = 'more active';
       } else {
-        tmp.className = "more";
+        tmp.className = 'more';
       }
     },
     clear: function() {
@@ -96,8 +96,8 @@ var app = new Vue({
     reset: function(options) {
       var tpl = {
         id: -1,
-        title: "",
-        content: "",
+        title: '',
+        content: '',
         time: null,
         finish: false,
         confirmed: false
@@ -109,36 +109,45 @@ var app = new Vue({
     //从localStorage中将数据取出
     this.list = storage.__getAll().data;
     //组件事件处理
-    Event.$on('remove', function(id) {
-      if (id || id === 0) {
-        this.remove(id);
-      }
-    }.bind(this));
-    Event.$on('change', function(id) {
-      if (id || id === 0) {
-        this.change(id);
-      }
-    }.bind(this));
-    Event.$on('finishTrigger', function(id) {
-      if (id || id === 0) {
-        this.finishTrigger(id);
-      }
-    }.bind(this));
+    Event.$on(
+      'remove',
+      function(id) {
+        if (id || id === 0) {
+          this.remove(id);
+        }
+      }.bind(this)
+    );
+    Event.$on(
+      'change',
+      function(id) {
+        if (id || id === 0) {
+          this.change(id);
+        }
+      }.bind(this)
+    );
+    Event.$on(
+      'finishTrigger',
+      function(id) {
+        if (id || id === 0) {
+          this.finishTrigger(id);
+        }
+      }.bind(this)
+    );
     //提示逻辑
-    var audio = document.getElementById("prompt");
+    var audio = document.getElementById('prompt');
     var check = function() {
       this.list.forEach(function(item) {
         if (item.time) {
           var timestamp = new Date(item.time).getTime();
           if (Date.now() >= timestamp && !item.confirmed) {
-              audio.currentTime = 0;
-              audio.pause();
-              audio.play();
-              item.confirmed = confirm(item.title);
-              item.finish = true;
-              audio.pause();
-              audio.currentTime = 0;
-              return;
+            audio.currentTime = 0;
+            audio.pause();
+            audio.play();
+            item.confirmed = confirm(item.title);
+            item.finish = true;
+            audio.pause();
+            audio.currentTime = 0;
+            return;
           }
         }
       });

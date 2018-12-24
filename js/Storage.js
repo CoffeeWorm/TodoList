@@ -1,8 +1,8 @@
 'use stirct';
 var storage = {
-  __key: "todo_list",
+  __key: 'todo_list',
   __default: { maxSub: 0, data: [] },
-  /* 
+  /*
    * localStorage 数据格式
    * {
    *     maxSub: ,
@@ -31,7 +31,7 @@ var storage = {
     var tpl = JSON.stringify(this.__default);
     return JSON.parse(localStorage[this.__key] || tpl);
   }
-}
+};
 
 /* Unit Test */
 // storage.set();
@@ -42,4 +42,4 @@ var storage = {
 // storage.setMaxSub(3);
 /* Test End */
 
-export default storage
+export default storage;
